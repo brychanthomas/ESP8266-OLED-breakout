@@ -9,6 +9,10 @@ Brick::Brick(int x, int y, int height, int width, SSD1306Wire* display) {
   exists = true;
 }
 
+Brick::Brick() {
+  
+}
+
 void Brick::destroy() {
   exists = false;
 }

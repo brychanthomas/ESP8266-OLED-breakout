@@ -3,7 +3,7 @@
 
 #include "Ball.h"
 #include "Paddle.h"
-#include "Brick.h"
+#include "Bricks.h"
 #include "constants.h"
 
 
@@ -19,10 +19,10 @@ void setup() {
   pinMode(PUSHBTN, INPUT_PULLUP);
 }
 
-Ball ball(60, 32, 45.0/FPS, 45.0/FPS, 3, &display);
+Ball ball(80, 32, 45.0/FPS, 45.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
 
-Brick b(20, 20, 16, 8, &display);
+Bricks bricks(&display);
 
 void loop() {
   display.clear();
@@ -32,7 +32,7 @@ void loop() {
 
   ball.draw();
   paddle.draw();
-  b.draw();
+  bricks.draw();
   display.display();
 
   delay(1000/FPS);

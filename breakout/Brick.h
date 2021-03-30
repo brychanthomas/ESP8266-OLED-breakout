@@ -9,6 +9,7 @@
 class Brick: public Sprite {
   public:
     Brick(int, int, int, int, SSD1306Wire*);
+    Brick();
     boolean exists;
     int x;
     int y;
