@@ -18,7 +18,7 @@ void setup() {
   pinMode(PUSHBTN, INPUT_PULLUP);
 }
 
-Ball ball(30, 32, 45.0/FPS, 45.0/FPS, 3, &display);
+Ball ball(60, 32, 45.0/FPS, 45.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
 
 void loop() {
