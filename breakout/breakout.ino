@@ -1,42 +1,8 @@
 #include <Wire.h>
 #include "SSD1306Wire.h"
 
-class Ball {
-  private:
-    double x;
-    double y;
-    double yVel;
-    double xVel;
-    int radius;
-    SSD1306Wire* disp;
-    
-  public:
-    Ball(int, int, double, double, int, SSD1306Wire*);
-    void update(void);
-    void draw();
-    void bounceOffBottom(void);
-    void bounceOffTop(void);
-    void bounceOffRight(void);
-    void bounceOffLeft(void);
-};
+#include "Ball.h"
 
-Ball::Ball(int xcoord, int ycoord, double xVelocity, double yVelocity, int rad, SSD1306Wire* display) {
-  x = xcoord;
-  y = ycoord;
-  xVel = xVelocity;
-  yVel = yVelocity;
-  radius = rad;
-  disp = display;
-}
-
-void Ball::update(void) {
-  x += xVel;
-  y += yVel;
-}
-
-void Ball::draw(void) {
-  disp->fillCircle(round(x), round(y), radius);
-}
 
 class Brick;
 
