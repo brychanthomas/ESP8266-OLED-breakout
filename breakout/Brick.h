@@ -6,6 +6,8 @@
 #include "constants.h"
 #endif
 
+#include "Ball.h"
+
 class Brick: public Sprite {
   public:
     Brick(int, int, int, int, SSD1306Wire*);

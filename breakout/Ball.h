@@ -11,12 +11,13 @@ class Ball: public Sprite {
     double yVel;
     double xVel;
     int diameter;
-    
+
   public:
     Ball(int, int, double, double, int, SSD1306Wire*);
     void draw();
     void update(int, int, int);
     void checkPaddleCollision(int, int, int);
+    boolean checkBrickCollision(int, int, int, int);
     void bounceOffTopOrBottom();
     void bounceOffSide();
     int getX();

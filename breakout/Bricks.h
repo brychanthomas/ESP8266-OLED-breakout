@@ -7,4 +7,5 @@ class Bricks {
   public:
     Bricks(SSD1306Wire*);
     void draw();
+    void update(Ball*);
 };

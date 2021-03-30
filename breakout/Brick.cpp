@@ -10,7 +10,7 @@ Brick::Brick(int x, int y, int height, int width, SSD1306Wire* display) {
 }
 
 Brick::Brick() {
-  
+
 }
 
 void Brick::destroy() {

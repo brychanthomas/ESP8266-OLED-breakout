@@ -50,3 +50,17 @@ void Ball::setPosition(int x, int y) {
   this->x = x;
   this->y = y;
 }
+
+boolean Ball::checkBrickCollision(int brickX, int brickY, int height, int width) {
+  //collision with bottom
+  if (brickY <= y+(diameter/2) && y-(diameter/2) <= brickY+width && abs(x-(brickX+height)) <= diameter/2 && xVel < 0) {
+    bounceOffTopOrBottom();
+    return true;
+  }
+  //collision with top
+  //else if (brickY <= y+(diameter/2) && y-(diameter/2) <= brickY+width && abs(x-brickX) <= diameter/2 && xVel > 0) {
+  //  bounceOffTopOrBottom();
+  //  return true;
+  //}
+  return false;
+}

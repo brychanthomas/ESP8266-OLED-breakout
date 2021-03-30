@@ -1,7 +1,6 @@
 #include <Wire.h>
 #include "SSD1306Wire.h"
 
-#include "Ball.h"
 #include "Paddle.h"
 #include "Bricks.h"
 #include "constants.h"
@@ -29,6 +28,7 @@ void loop() {
 
   paddle.update();
   ball.update(paddle.getX(), paddle.getY(), paddle.getWidth());
+  bricks.update(&ball);
 
   ball.draw();
   paddle.draw();
@@ -39,7 +39,7 @@ void loop() {
 
   if (ball.getX() > paddle.getX()) {
     delay(1000);
-    ball.setPosition(30, 32);
+    ball.setPosition(80, 32);
   }
 
 }
