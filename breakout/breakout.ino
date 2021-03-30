@@ -3,6 +3,8 @@
 
 #include "Ball.h"
 
+#define FPS 30
+
 
 class Brick;
 
@@ -17,14 +19,14 @@ void setup() {
   Serial.println("A");
 }
 
-Ball ball(1, 30, 1.5, 0.0, 3, &display);
+Ball ball(5, 30, 45/FPS, 90/FPS, 3, &display);
 void loop() {
   display.clear();
   ball.draw();
   display.display();
   Serial.println("B");
   ball.update();
-  delay(50);
+  delay(1000/FPS);
   Serial.println("C");
 
 }

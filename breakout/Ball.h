@@ -12,10 +12,8 @@ class Ball {
     
   public:
     Ball(int, int, double, double, int, SSD1306Wire*);
-    void update(void);
+    void update();
     void draw();
-    void bounceOffBottom(void);
-    void bounceOffTop(void);
-    void bounceOffRight(void);
-    void bounceOffLeft(void);
+    void bounceOffTopOrBottom();
+    void bounceOffSide();
 };
