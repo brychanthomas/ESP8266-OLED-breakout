@@ -3,6 +3,7 @@
 
 #include "Ball.h"
 #include "Paddle.h"
+#include "Brick.h"
 #include "constants.h"
 
 
@@ -21,6 +22,8 @@ void setup() {
 Ball ball(60, 32, 45.0/FPS, 45.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
 
+Brick b(20, 20, 16, 8, &display);
+
 void loop() {
   display.clear();
 
@@ -29,6 +32,7 @@ void loop() {
 
   ball.draw();
   paddle.draw();
+  b.draw();
   display.display();
 
   delay(1000/FPS);
