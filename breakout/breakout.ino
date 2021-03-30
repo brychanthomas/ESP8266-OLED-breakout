@@ -2,13 +2,9 @@
 #include "SSD1306Wire.h"
 
 #include "Ball.h"
+#include "Paddle.h"
+#include "constants.h"
 
-#define FPS 30
-
-
-class Brick;
-
-class Paddle;
 
 SSD1306Wire display(0x3c, 5, 4);  // ADDRESS, SDA, SCL
 
@@ -16,17 +12,25 @@ void setup() {
   Serial.begin(115200);
   display.init();
   display.setColor(WHITE);
-  Serial.println("A");
+  pinMode(RIGHTBTN, INPUT_PULLUP);
+  pinMode(LEFTBTN, INPUT_PULLUP);
+  pinMode(UPBTN, INPUT_PULLUP);
+  pinMode(PUSHBTN, INPUT_PULLUP);
 }
 
-Ball ball(5, 30, 45/FPS, 90/FPS, 3, &display);
+Ball ball(30, 30, 45.0/FPS, 90.0/FPS, 3, &display);
+Paddle paddle(120, 20, &display);
+
 void loop() {
   display.clear();
-  ball.draw();
-  display.display();
-  Serial.println("B");
+
   ball.update();
+  paddle.update();
+
+  ball.draw();
+  paddle.draw();
+  display.display();
+
   delay(1000/FPS);
-  Serial.println("C");
 
 }

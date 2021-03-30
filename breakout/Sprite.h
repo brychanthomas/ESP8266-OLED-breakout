@@ -1,9 +1,11 @@
 #include "SSD1306Wire.h"
 
+#include "constants.h"
+
 class Sprite {
   protected:
-    int x;
-    int y;
+    double x;
+    double y;
     SSD1306Wire* disp;
 
   public:

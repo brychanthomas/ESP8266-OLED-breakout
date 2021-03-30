@@ -1,7 +1,10 @@
+#ifndef INCLUDED
+#define INCLUDED
 #include <Arduino.h>
 #include "SSD1306Wire.h"
-
 #include "Sprite.h"
+#include "constants.h"
+#endif
 
 class Ball: public Sprite {
   private:
