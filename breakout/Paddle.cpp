@@ -12,9 +12,9 @@ void Paddle::draw() {
 }
 
 void Paddle::update() {
-  if (digitalRead(RIGHTBTN) == 0) {
+  if (digitalRead(RIGHTBTN) == 0 && y+(width/2) <= 64) {
     y += 40.0/FPS;
-  } else if (digitalRead(LEFTBTN) == 0) {
+  } else if (digitalRead(LEFTBTN) == 0 && y-(width/2) >= 1) {
     y -= 40.0/FPS;
   }
 }
