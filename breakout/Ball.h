@@ -19,4 +19,6 @@ class Ball: public Sprite {
     void checkPaddleCollision(int, int, int);
     void bounceOffTopOrBottom();
     void bounceOffSide();
+    int getX();
+    void setPosition(int, int);
 };

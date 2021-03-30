@@ -18,7 +18,7 @@ void setup() {
   pinMode(PUSHBTN, INPUT_PULLUP);
 }
 
-Ball ball(30, 30, 45.0/FPS, 45.0/FPS, 3, &display);
+Ball ball(30, 32, 45.0/FPS, 45.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
 
 void loop() {
@@ -32,5 +32,10 @@ void loop() {
   display.display();
 
   delay(1000/FPS);
+
+  if (ball.getX() > paddle.getX()) {
+    delay(1000);
+    ball.setPosition(30, 32);
+  }
 
 }

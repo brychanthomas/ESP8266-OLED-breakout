@@ -24,7 +24,7 @@ void Ball::update(int paddleX, int paddleY, int paddleWidth) {
 }
 
 void Ball::checkPaddleCollision(int paddleX, int paddleY, int paddleWidth) {
-  if (paddleX - x < diameter/2 && y+diameter/2 >= paddleY-(paddleWidth/2) && y-diameter/2 <= paddleY+(paddleWidth/2)) {
+  if (paddleX - x <= diameter/2 && y+diameter/2 >= paddleY-(paddleWidth/2) && y-diameter/2 <= paddleY+(paddleWidth/2)) {
     bounceOffTopOrBottom();
   }
 }
@@ -39,4 +39,13 @@ void Ball::bounceOffTopOrBottom() {
 
 void Ball::bounceOffSide() {
   yVel = -yVel;
+}
+
+int Ball::getX() {
+  return x;
+}
+
+void Ball::setPosition(int x, int y) {
+  this->x = x;
+  this->y = y;
 }
