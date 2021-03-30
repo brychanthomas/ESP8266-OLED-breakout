@@ -18,3 +18,15 @@ void Paddle::update() {
     y -= 40.0/FPS;
   }
 }
+
+int Paddle::getY() {
+  return y;
+}
+
+int Paddle::getX() {
+  return x;
+}
+
+int Paddle::getWidth() {
+  return width;
+}

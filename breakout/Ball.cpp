@@ -9,16 +9,23 @@ Ball::Ball(int xcoord, int ycoord, double xVelocity, double yVelocity, int diame
   disp = display;
 }
 
-void Ball::update() {
+void Ball::update(int paddleX, int paddleY, int paddleWidth) {
+  checkPaddleCollision(paddleX, paddleY, paddleWidth);
   x += xVel;
   y += yVel;
   if (y-diameter/2 <= 1 || y+diameter/2 >= 64) {
     bounceOffSide();
     y += 2*yVel;
   }
-  if (x-diameter/2 <= 1 || x+diameter/2 >= 128) {
+  if (x-diameter/2 <= 1) {
     bounceOffTopOrBottom();
     x += 2*xVel;
+  }
+}
+
+void Ball::checkPaddleCollision(int paddleX, int paddleY, int paddleWidth) {
+  if (paddleX - x < diameter/2 && y+diameter/2 >= paddleY-(paddleWidth/2) && y-diameter/2 <= paddleY+(paddleWidth/2)) {
+    bounceOffTopOrBottom();
   }
 }
 

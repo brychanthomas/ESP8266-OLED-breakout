@@ -15,7 +15,8 @@ class Ball: public Sprite {
   public:
     Ball(int, int, double, double, int, SSD1306Wire*);
     void draw();
-    void update();
+    void update(int, int, int);
+    void checkPaddleCollision(int, int, int);
     void bounceOffTopOrBottom();
     void bounceOffSide();
 };

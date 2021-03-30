@@ -18,14 +18,14 @@ void setup() {
   pinMode(PUSHBTN, INPUT_PULLUP);
 }
 
-Ball ball(30, 30, 45.0/FPS, 90.0/FPS, 3, &display);
+Ball ball(30, 30, 45.0/FPS, 45.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
 
 void loop() {
   display.clear();
 
-  ball.update();
   paddle.update();
+  ball.update(paddle.getX(), paddle.getY(), paddle.getWidth());
 
   ball.draw();
   paddle.draw();

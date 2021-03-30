@@ -9,6 +9,5 @@ class Sprite {
     SSD1306Wire* disp;
 
   public:
-    virtual void update()=0;
     virtual void draw()=0;
 };
