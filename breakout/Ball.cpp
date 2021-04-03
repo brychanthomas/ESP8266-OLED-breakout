@@ -68,7 +68,13 @@ boolean Ball::checkBrickCollision(int brickX, int brickY, int height, int width)
   double rightOfCircleY = y + radius;
   double leftOfCircleY = y - radius;
   //collision with bottom
-  if (topOfCircleX >= brickX && topOfCircleX <= brickX+height && rightOfCircleY >= brickY && leftOfCircleY <= brickY+width && xVel < 0) {
+  if (topOfCircleX >= brickX && topOfCircleX <= brickX+height && rightOfCircleY >= brickY-1 && leftOfCircleY <= brickY+width+1 && xVel < 0) {
+    bounceOffTopOrBottom();
+    return true;
+  }
+
+  //collision with top
+  if (bottomOfCircleX >= brickX && bottomOfCircleX <= brickX+height && rightOfCircleY >= brickY && leftOfCircleY <= brickY+width && xVel > 0) {
     bounceOffTopOrBottom();
     return true;
   }

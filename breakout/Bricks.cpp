@@ -17,7 +17,10 @@ void Bricks::draw() {
 void Bricks::update(Ball* b) {
   for (int i=0; i<sizeof(bricks)/sizeof(bricks[i]); i++) {
     if (bricks[i].exists) {
-      bricks[i].exists = !b->checkBrickCollision(bricks[i].x, bricks[i].y, bricks[i].height, bricks[i].width);
+      if (b->checkBrickCollision(bricks[i].x, bricks[i].y, bricks[i].height, bricks[i].width)) {
+        bricks[i].exists = false;
+        break;
+      }
     }
   }
 }
