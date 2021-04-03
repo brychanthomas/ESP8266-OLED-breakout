@@ -52,15 +52,37 @@ void Ball::setPosition(int x, int y) {
 }
 
 boolean Ball::checkBrickCollision(int brickX, int brickY, int height, int width) {
+  // //collision with bottom
+  // if (brickY-2 <= y+(diameter/2.0) && y-(diameter/2.0) <= brickY+width+2 && abs(x-(brickX+height)) <= diameter/2.0 && xVel < 0) {
+  //   bounceOffTopOrBottom();
+  //   return true;
+  // }
+  // //collision with sides
+  // if (x+(diameter/2.0) >= brickX && x-(diameter/2.0) <= brickX+height && y+(diameter/2.0) >= brickY && y-(diameter/2.0) <= brickY+width) {
+  //   bounceOffSide();
+  //   return true;
+  // }
+  double radius = diameter/2.0;
+  double topOfCircleX = x - radius;
+  double bottomOfCircleX = x + radius;
+  double rightOfCircleY = y + radius;
+  double leftOfCircleY = y - radius;
   //collision with bottom
-  if (brickY <= y+(diameter/2) && y-(diameter/2) <= brickY+width && abs(x-(brickX+height)) <= diameter/2 && xVel < 0) {
+  if (topOfCircleX >= brickX && topOfCircleX <= brickX+height && rightOfCircleY >= brickY && leftOfCircleY <= brickY+width && xVel < 0) {
     bounceOffTopOrBottom();
     return true;
   }
-  //collision with top
-  //else if (brickY <= y+(diameter/2) && y-(diameter/2) <= brickY+width && abs(x-brickX) <= diameter/2 && xVel > 0) {
-  //  bounceOffTopOrBottom();
-  //  return true;
-  //}
+
+  //collision with left side
+  if (rightOfCircleY >= brickY && leftOfCircleY <= brickY && topOfCircleX <= brickX+height && brickX <= bottomOfCircleX && yVel > 0) {
+    bounceOffSide();
+    return true;
+  }
+
+  //collision with right side
+  if (leftOfCircleY <= brickY + width && rightOfCircleY >= brickY + width && topOfCircleX <= brickX+height && brickX <= bottomOfCircleX && yVel < 0) {
+    bounceOffSide();
+    return true;
+  }
   return false;
 }
