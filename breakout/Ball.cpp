@@ -26,7 +26,7 @@ void Ball::update(int paddleX, int paddleY, int paddleWidth) {
 void Ball::checkPaddleCollision(int paddleX, int paddleY, int paddleWidth) {
   if (paddleX - x <= diameter/2 && y+diameter/2 >= paddleY-(paddleWidth/2) && y-diameter/2 <= paddleY+(paddleWidth/2)) {
     bounceOffTopOrBottom();
-    yVel = ((double)random(25, 50)/FPS)*((yVel>=0) ? 1 : -1);
+    yVel = ((double)random(25, 80)/FPS)*((yVel>=0) ? 1 : -1);
   }
 }
 
