@@ -52,43 +52,23 @@ void Ball::setPosition(int x, int y) {
 }
 
 boolean Ball::checkBrickCollision(int brickX, int brickY, int height, int width) {
-  // //collision with bottom
-  // if (brickY-2 <= y+(diameter/2.0) && y-(diameter/2.0) <= brickY+width+2 && abs(x-(brickX+height)) <= diameter/2.0 && xVel < 0) {
-  //   bounceOffTopOrBottom();
-  //   return true;
-  // }
-  // //collision with sides
-  // if (x+(diameter/2.0) >= brickX && x-(diameter/2.0) <= brickX+height && y+(diameter/2.0) >= brickY && y-(diameter/2.0) <= brickY+width) {
-  //   bounceOffSide();
-  //   return true;
-  // }
+
+  boolean destroyBlock = false;
+
   double radius = diameter/2.0;
-  double topOfCircleX = x - radius;
-  double bottomOfCircleX = x + radius;
-  double rightOfCircleY = y + radius;
-  double leftOfCircleY = y - radius;
-  //collision with bottom
-  if (topOfCircleX >= brickX && topOfCircleX <= brickX+height && rightOfCircleY >= brickY-1 && leftOfCircleY <= brickY+width+1 && xVel < 0) {
-    bounceOffTopOrBottom();
-    return true;
-  }
 
-  //collision with top
-  if (bottomOfCircleX >= brickX && bottomOfCircleX <= brickX+height && rightOfCircleY >= brickY && leftOfCircleY <= brickY+width && xVel > 0) {
-    bounceOffTopOrBottom();
-    return true;
-  }
+  int deltaX = x - max((double)brickX, min(x, (double)brickX+width));
+  int deltaY = y - max((double)brickY, min(y, (double)brickY+height));
+  if (deltaX*deltaX + deltaY*deltaY <= radius*radius) { //if ball and brick overlapping
+    if (x >= brickX+width || x <= brickX) {
+      bounceOffTopOrBottom();
+      destroyBlock = true;
+    }
 
-  //collision with left side
-  if (rightOfCircleY >= brickY && leftOfCircleY <= brickY && topOfCircleX <= brickX+height && brickX <= bottomOfCircleX && yVel > 0) {
-    bounceOffSide();
-    return true;
+    if (y >= brickY+height || y <= brickY) {
+      bounceOffSide();
+      destroyBlock = true;
+    }
   }
-
-  //collision with right side
-  if (leftOfCircleY <= brickY + width && rightOfCircleY >= brickY + width && topOfCircleX <= brickX+height && brickX <= bottomOfCircleX && yVel < 0) {
-    bounceOffSide();
-    return true;
-  }
-  return false;
+  return destroyBlock;
 }
