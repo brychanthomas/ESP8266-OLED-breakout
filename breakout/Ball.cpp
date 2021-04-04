@@ -13,7 +13,7 @@ void Ball::update(int paddleX, int paddleY, int paddleWidth) {
   checkPaddleCollision(paddleX, paddleY, paddleWidth);
   x += xVel;
   y += yVel;
-  if (y-diameter/2 <= 1 || y+diameter/2 >= 64) {
+  if (y-diameter/2 <= 1 || y+diameter/2 >= 63) {
     bounceOffSide();
     y += 2*yVel;
   }
