@@ -47,40 +47,41 @@ void setup() {
   showStartScreen();
 }
 
-Ball ball(80, 32, 70.0/FPS, 70.0/FPS, 3, &display);
-Paddle paddle(120, 20, &display);
-Bricks bricks(&display);
+Ball* ball = new Ball(80, 32, 70.0/FPS, 70.0/FPS, 3, &display);
+Paddle* paddle = new Paddle(120, 20, &display);
+Bricks* bricks = new Bricks(&display);
 
 void loop() {
   display.clear();
 
-  paddle.update();
-  ball.update(paddle.getX(), paddle.getY(), paddle.getWidth());
-  bricks.update(&ball);
+  paddle->update();
+  ball->update(paddle->getX(), paddle->getY(), paddle->getWidth());
+  bricks->update(ball);
 
-  ball.draw();
-  paddle.draw();
-  bricks.draw();
+  ball->draw();
+  paddle->draw();
+  bricks->draw();
   display.display();
 
   delay(1000/FPS);
 
-  if (ball.getX() > paddle.getX()) {
+  if (ball->getX() > paddle->getX()) {
     display.drawXbm(75, 8, pushToPlayWidth, pushToPlayHeight, pushToPlayXBM);
     display.invertDisplay();
     display.display();
     while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
     display.normalDisplay();
-    ball.setPosition(80, 32);
+    ball->setPosition(80, 32);
   }
 
-  if (bricks.getScore() == 32) { //if all bricks destroyed
+  if (bricks->getScore() == 32) { //if all bricks destroyed
     display.clear();
     display.drawXbm(60, 3, winnerWidth, winnerHeight, winnerXBM);
     display.invertDisplay();
     display.display();
-    while(1) { delay(10000); }
-    //resetGame();
+    delay(5000);
+    resetGame();
+    showStartScreen();
   }
 
 }
@@ -91,4 +92,14 @@ void showStartScreen() {
   display.display();
   while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
   display.normalDisplay();
+}
+
+void resetGame() {
+  delete ball;
+  delete paddle;
+  delete bricks;
+
+  ball = new Ball(80, 32, 70.0/FPS, 70.0/FPS, 3, &display);
+  paddle = new Paddle(120, 20, &display);
+  bricks = new Bricks(&display);
 }

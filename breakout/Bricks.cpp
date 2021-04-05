@@ -20,7 +20,7 @@ void Bricks::update(Ball* b) {
     if (bricks[i].exists) {
       if (b->checkBrickCollision(bricks[i].x, bricks[i].y, bricks[i].height, bricks[i].width)) {
         bricks[i].exists = false;
-        score += 1
+        score++;
         break;
       }
     }
