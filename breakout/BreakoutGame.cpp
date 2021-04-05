@@ -9,12 +9,18 @@ BreakoutGame::BreakoutGame(SSD1306Wire* disp) {
   showStartScreen();
 }
 
+/**
+ * Update the paddle, the ball and the bricks
+ */
 void BreakoutGame::update() {
   paddle->update();
   ball->update(paddle->getX(), paddle->getY(), paddle->getWidth());
   bricks->update(ball);
 }
 
+/**
+ * Clear the display and draw the paddle, the ball and the bricks
+ */
 void BreakoutGame::draw() {
   display->clear();
   ball->draw();
@@ -23,17 +29,22 @@ void BreakoutGame::draw() {
   display->display();
 }
 
+/**
+ * Run the game for one frame. If the paddle misses the ball, stop and wait
+ * for user to push button. If all bricks are destroyed, show winner message
+ * before resetting
+ */
 void BreakoutGame::runFrame() {
   update();
   draw();
 
   delay(1000/FPS);
 
-  if (ball->getX() > paddle->getX()) {
+  if (ball->getX() > paddle->getX()) { //if ball has passed paddle
     display->drawXbm(75, 8, pushToPlayWidth, pushToPlayHeight, pushToPlayXBM);
     display->invertDisplay();
     display->display();
-    while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
+    while(digitalRead(PUSHBTN) == HIGH) {delay(50);} //wait for user input
     display->normalDisplay();
     ball->setPosition(80, 32);
   }
@@ -49,6 +60,10 @@ void BreakoutGame::runFrame() {
   }
 }
 
+/**
+ * Reset the game by deleting and reconstructing the ball, paddle
+ * and bricks objects.
+ */
 void BreakoutGame::reset() {
   delete ball;
   delete paddle;
@@ -59,11 +74,14 @@ void BreakoutGame::reset() {
   bricks = new Bricks(display);
 }
 
+/**
+ * Show the 'push to play' screen and wait for the user to push the button.
+ */
 void BreakoutGame::showStartScreen() {
   display->clear();
   display->drawXbm(60, 8, pushToPlayWidth, pushToPlayHeight, pushToPlayXBM);
   display->invertDisplay();
   display->display();
-  while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
+  while(digitalRead(PUSHBTN) == HIGH) {delay(50);} //wait for user input
   display->normalDisplay();
 }
