@@ -1,5 +1,8 @@
 #include "Brick.h"
 
+/**
+ * Class to represent all of the bricks in the game
+ */
 class Bricks {
   private:
     Brick bricks[32];

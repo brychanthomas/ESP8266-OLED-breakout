@@ -8,6 +8,9 @@
 
 #include "Ball.h"
 
+/**
+ * Class to represent a single brick - inherits from Sprite class
+ */
 class Brick: public Sprite {
   public:
     Brick(int, int, int, int, SSD1306Wire*);
