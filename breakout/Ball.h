@@ -6,6 +6,9 @@
 #include "constants.h"
 #endif
 
+/**
+ * Class to represent ball that bounces around
+ */
 class Ball: public Sprite {
   private:
     double yVel;

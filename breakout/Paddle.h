@@ -6,6 +6,9 @@
 #include "constants.h"
 #endif
 
+/**
+ * Represents movable paddle at the bottom of the screen
+ */
 class Paddle: public Sprite {
   private:
     int width;
