@@ -2,7 +2,7 @@
 
 BreakoutGame::BreakoutGame(SSD1306Wire* disp) {
   display = disp;
-  ball = new Ball(80, 32, 70.0/FPS, 70.0/FPS, 3, display);
+  ball = new Ball(80, 32, 70.0/FPS, 20.0/FPS, 3, display);
   paddle = new Paddle(120, 20, display);
   bricks = new Bricks(display);
 
