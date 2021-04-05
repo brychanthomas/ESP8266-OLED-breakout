@@ -7,7 +7,7 @@
 #define pushToPlayWidth 22
 #define pushToPlayHeight 49
 
-const uint8_t pushToPlay[] PROGMEM = {
+const uint8_t pushToPlayXBM[] PROGMEM = {
   0xFF, 0x01, 0x00, 0xFF, 0x01, 0x00, 0x83, 0x01, 0x00, 0x83, 0x01, 0x00,
   0xFF, 0x01, 0x00, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   0x03, 0x00, 0x00, 0x03, 0xE0, 0x01, 0xFF, 0xE1, 0x01, 0xFF, 0x01, 0x3E,
@@ -23,12 +23,15 @@ const uint8_t pushToPlay[] PROGMEM = {
   0xFF, 0x01, 0x00
 };
 
-/*
-TODO:
-- press button to start
-- maybe check if brick is surrounded before colliding to reduce bugginess?
-*/
-
+#define winnerWidth 8
+#define winnerHeight 59
+const uint8_t winnerXBM[] PROGMEM = {
+  0xCF, 0xCF, 0x00, 0x00, 0xDE, 0xDE, 0x73, 0x33, 0xFF, 0xFF, 0x00, 0x00,
+  0xDB, 0xDB, 0xDB, 0xFF, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x60, 0x30, 0x18,
+  0x0C, 0x06, 0xFF, 0xFF, 0x00, 0x00, 0xFF, 0xFF, 0x60, 0x30, 0x18, 0x0C,
+  0x06, 0xFF, 0xFF, 0x00, 0x00, 0xC3, 0xC3, 0xFF, 0xFF, 0xC3, 0xC3, 0x00,
+  0x00, 0xFF, 0xFF, 0xC0, 0x60, 0x30, 0x30, 0x60, 0xC0, 0xFF, 0xFF
+};
 
 SSD1306Wire display(0x3c, 5, 4);  // ADDRESS, SDA, SCL
 
@@ -41,16 +44,11 @@ void setup() {
   pinMode(UPBTN, INPUT_PULLUP);
   pinMode(PUSHBTN, INPUT_PULLUP);
 
-  display.drawXbm(60, 8, pushToPlayWidth, pushToPlayHeight, pushToPlay);
-  display.invertDisplay();
-  display.display();
-  while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
-  display.normalDisplay();
+  showStartScreen();
 }
 
 Ball ball(80, 32, 70.0/FPS, 70.0/FPS, 3, &display);
 Paddle paddle(120, 20, &display);
-
 Bricks bricks(&display);
 
 void loop() {
@@ -68,7 +66,7 @@ void loop() {
   delay(1000/FPS);
 
   if (ball.getX() > paddle.getX()) {
-    display.drawXbm(75, 8, pushToPlayWidth, pushToPlayHeight, pushToPlay);
+    display.drawXbm(75, 8, pushToPlayWidth, pushToPlayHeight, pushToPlayXBM);
     display.invertDisplay();
     display.display();
     while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
@@ -76,4 +74,21 @@ void loop() {
     ball.setPosition(80, 32);
   }
 
+  if (bricks.getScore() == 32) { //if all bricks destroyed
+    display.clear();
+    display.drawXbm(60, 3, winnerWidth, winnerHeight, winnerXBM);
+    display.invertDisplay();
+    display.display();
+    while(1) { delay(10000); }
+    //resetGame();
+  }
+
+}
+
+void showStartScreen() {
+  display.drawXbm(60, 8, pushToPlayWidth, pushToPlayHeight, pushToPlayXBM);
+  display.invertDisplay();
+  display.display();
+  while(digitalRead(PUSHBTN) == HIGH) {delay(50);}
+  display.normalDisplay();
 }
